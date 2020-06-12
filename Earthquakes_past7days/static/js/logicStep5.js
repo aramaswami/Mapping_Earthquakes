@@ -197,7 +197,7 @@ L.geoJson(data, {
     // We turn each feature into a circleMarker on the map.
     
     pointToLayer: function(feature, latlng) {
-                  console.log(data);
+                  //console.log(data);
                   return L.circleMarker(latlng);
             },
 
@@ -213,6 +213,35 @@ L.geoJson(data, {
         earthquakes.addTo(map);
 
     });
+
+    let legend = L.control({position: 'bottomright'});
+    legend.onAdd = function () {
+        let div = L.DomUtil.create('div', 'info legend');
+    
+        const magnitudes = [0, 1, 2, 3, 4, 5];
+        const colors = [
+          "#98ee00",
+          "#d4ee00",
+          "#eecc00",
+          "#ee9c00",
+          "#ea822c",
+          "#ea2c2c"
+        ];
+    
+        // Looping through our intervals to generate a label with a colored square for each interval.
+       for (var i = 0; i < magnitudes.length; i++) {
+        console.log(colors[i]);
+        console.log(magnitudes.length);
+        div.innerHTML +=
+          "<i style='background: " + colors[i] + "'></i> " +
+          magnitudes[i] + (magnitudes[i + 1] ? "&ndash;" + magnitudes[i + 1] + "<br>" : "+");
+        }
+        return div;
+    };
+    
+    legend.addTo(map);
+    
+    //});
 
 // This function returns the style data for each of the earthquakes we plot on
 // the map. We pass the magnitude of the earthquake into a function
@@ -270,33 +299,4 @@ function getColor(magnitude) {
 // Then we add a control to the map that will allow the user to change
 // which layers are visible.
 //L.control.layers(baseMaps, overlays).addTo(map);
-
-var legend = L.control({position: 'bottomright'});
-legend.onAdd = function () {
-    let div = L.DomUtil.create('div', 'info legend');
-
-    const magnitudes = [0, 1, 2, 3, 4, 5];
-    const colors = [
-      "#98ee00",
-      "#d4ee00",
-      "#eecc00",
-      "#ee9c00",
-      "#ea822c",
-      "#ea2c2c"
-    ];
-
-    // Looping through our intervals to generate a label with a colored square for each interval.
-   for (var i = 0; i < magnitudes.length; i++) {
-    console.log(colors[i]);
-    div.innerHTML +=
-      "<i style='background: " + colors[i] + "'></i> " +
-      magnitudes[i] + (magnitudes[i + 1] ? "&ndash;" + magnitudes[i + 1] + "<br>" : "+");
-    }
-    return div;
-};
-
-
-
-legend.addTo(map);
-
 
