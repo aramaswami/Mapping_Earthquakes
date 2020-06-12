@@ -100,7 +100,9 @@ L.geoJson(data, {
     legend.onAdd = function () {
         let div = L.DomUtil.create('div', 'info legend');
     
-        const magnitudes = [0, 1, 2, 3, 4, 5];
+        const magnitudes = [0, 1, 2, 3, 4, 5],
+        labels = [];
+        
         const colors = [
           "#98ee00",
           "#d4ee00",
