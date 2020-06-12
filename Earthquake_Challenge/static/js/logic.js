@@ -60,7 +60,7 @@ let baseMaps = {
   // This overlay will be visible all the time.
   let overlays = {
       Earthquakes: earthquakes,
-      Tectonic_plases: tectonic
+      Tectonic_plates: tectonic
     };
   
 
